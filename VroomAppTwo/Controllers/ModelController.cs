@@ -47,5 +47,15 @@ namespace VroomAppTwo.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+     public IActionResult Edit(int id)
+        {
+            ModelVM.Model = _db.Models.Include(m => m.Make).SingleOrDefault(m => m.Id == id);   
+              if(ModelVM.Model == null)
+            {
+                return NotFound();
+            }
+
+            return View(ModelVM);  
+           }
     }
 }
